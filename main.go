@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"net/http"
 	"os"
 
@@ -45,7 +46,7 @@ func main() {
 
 	// Send emails
 	direct := os.Getenv("COURIER_DIRECT")
-	if direct == true {
+	if direct == "true" {
 		log.Printf("[BUTTONDOWN] Sending emails without human checks.")
 		for post, _ := range newPosts {
 			resp, err := http.PostForm("https://api.buttondown.email/v1/emails", url.Values{
