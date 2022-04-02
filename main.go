@@ -8,9 +8,9 @@ import (
 )
 
 type Post struct {
-	Body string,
-	Url string,
-	Title string,
+	Body string
+	Url string
+	Title string
 }
 
 func main() {
