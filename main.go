@@ -28,7 +28,7 @@ func main() {
 	if err != nil {
 		log.Panicf("[FEED] Could not parse %v: %v", os.Args[1], err)
 	}
-	for post, i := range feed.Items {
+	for i, post := range feed.Items {
 		// New posts will be published at the same time as
 		// the feed usually. There are some outstanding conditions,
 		// but this can usually be avoided by.. y'know.. updating your
@@ -48,7 +48,7 @@ func main() {
 	direct := os.Getenv("COURIER_DIRECT")
 	if direct == "true" {
 		log.Printf("[BUTTONDOWN] Sending emails without human checks.")
-		for post, _ := range newPosts {
+		for _, post := range newPosts {
 			resp, err := http.PostForm("https://api.buttondown.email/v1/emails", url.Values{
 				"body": post.Body,
 				"email_type": "public", // ????
@@ -61,7 +61,7 @@ func main() {
 		}
 		// Send emails
 	} else {
-		for post, _ := range newPosts {
+		for _, post := range newPosts {
 			resp, err := http.PostForm("https://api.buttondown.email/v1/drafts", url.Values{
 				"body": post.Body,
 				"subject": post.Title,
