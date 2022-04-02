@@ -50,7 +50,7 @@ func main() {
 	if direct == "true" {
 		log.Printf("[BUTTONDOWN] Sending emails without human checks.")
 		for _, post := range newPosts {
-			resp, err := http.PostForm("https://api.buttondown.email/v1/emails", url.Values{
+			_, err := http.PostForm("https://api.buttondown.email/v1/emails", url.Values{
 				"body": post.Body,
 				"email_type": "public", // ????
 				"external_url": post.Url,
@@ -63,7 +63,7 @@ func main() {
 		// Send emails
 	} else {
 		for _, post := range newPosts {
-			resp, err := http.PostForm("https://api.buttondown.email/v1/drafts", url.Values{
+			_, err := http.PostForm("https://api.buttondown.email/v1/drafts", url.Values{
 				"body": post.Body,
 				"subject": post.Title,
 			})
